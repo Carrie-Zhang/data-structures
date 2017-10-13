@@ -18,7 +18,7 @@ treeMethods.contains = function(target) {
   var output = false;
   var rec = function (node) {
     if (node.value === target) {
-      return true;
+      output = true;
     }
     if (node.children.length > 0) {
       for (var i = 0; i < node.children.length; i++) {

@@ -13,13 +13,15 @@ HashTable.prototype.insert = function(k, v) {
   //   bucket.push(v);
   // }
   var bucket = this._storage.get(index) || [];
-  bucket.push([k, v]);
-  this._storage.set(index, bucket);
+  
   for (var i = 0; i < bucket.length; i++) {
     if (bucket[i][0] === k) {
-      bucket[i][1] = v;
+      bucket.splice(i, 1);
     }
   }
+  // this.remove(k);
+  bucket.push([k, v]);
+  this._storage.set(index, bucket);
   // var bucket = this._storage.get(index);
   
   //if (!bucket) {
@@ -58,6 +60,9 @@ var hashTable = new HashTable();
 
 /*
  * Complexity: What is the time complexity of the above functions?
+ * insert: O(1) O(n)
+ * retrieve : O(n)
+ * remove : O(n)
  */
 
 

@@ -17,6 +17,7 @@ HashTable.prototype.insert = function(k, v) {
   for (var i = 0; i < bucket.length; i++) {
     if (bucket[i][0] === k) {
       bucket.splice(i, 1);
+      // bucket[i] = [k, v];
     }
   }
   // this.remove(k);

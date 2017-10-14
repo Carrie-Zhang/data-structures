@@ -29,7 +29,7 @@ binaryTreeMethods.insert = function(value) {
     } else {
       currentNode.right.insert(value);
     }
- }
+  } 
 };
 binaryTreeMethods.contains = function(value) {
   var currentNode = this;

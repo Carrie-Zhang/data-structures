@@ -3,40 +3,41 @@
 var HashTable = function() {
   this._limit = 8;
   this._storage = LimitedArray(this._limit);
+  this.count = 0;
 };
 
 HashTable.prototype.insert = function(k, v) {
   var index = getIndexBelowMaxForKey(k, this._limit);
-  // this._storage.get(index) = this._storage.get(index) || [];
-  // var bucket = this._storage.get(index);
-  // if (!bucket) {
-  //   bucket.push(v);
-  // }
   var bucket = this._storage.get(index) || [];
-  
+
   for (var i = 0; i < bucket.length; i++) {
-    if (bucket[i][0] === k) {
-      bucket.splice(i, 1);
+    var tuple = bucket[i];
+    if (tuple[0] === k) {
+      // bucket.splice(i, 1);
+      var oldValue = tuple[1];
+      tuple[1] = v;
       // bucket[i] = [k, v];
+      return oldValue;
     }
   }
-  // this.remove(k);
   bucket.push([k, v]);
   this._storage.set(index, bucket);
-  // var bucket = this._storage.get(index);
+  this.count ++;
   
-  //if (!bucket) {
-    //this._storage.set(index, []);
-    // bucket.push([k, v]);
-  //}
+  // var count = 0;
+
+  // for (var i = 0; i < this._limit; i++) {
+  //   if ()
+  // }
+
+  if (this.count >= this._limit * 0.75) {
+    // this._limit *= 2;
+  }
+
 };
 
 HashTable.prototype.retrieve = function(k) {
   var index = getIndexBelowMaxForKey(k, this._limit);
-  // var bucket = this._storage.get(index);
-  // // for (var i = 0; i < bucket.length; i++) {
-  //   return bucket;
-  // }
   var bucket = this._storage.get(index);
   for (var i = 0; i < bucket.length; i++) {
     if (bucket[i][0] === k) {
@@ -47,17 +48,35 @@ HashTable.prototype.retrieve = function(k) {
 
 HashTable.prototype.remove = function(k) {
   var index = getIndexBelowMaxForKey(k, this._limit);  
-  // delete this._storage.get(index);
   var bucket = this._storage.get(index);
   for (var i = 0; i < bucket.length; i++) {
     if (bucket[i][0] === k) {
       bucket.splice(i, 1);
     }
   }
-  
+
+  // this.count --;
+
+  // if (this.count >= this._limit * 0.75) {
+  //   this._limit *= 2;
+  // }
+  // if (this.count <= this._limit * 0.25) {
+  //   this._limit /= 2;
+  // }
 };
 
-var hashTable = new HashTable();
+// input: a number, new limit of the hash table
+// output: a new hash table
+// compare the old hash table's limit with new limit
+  // 
+HashTable.prototype.resize = function() {
+
+
+}; 
+
+
+
+// var hashTable = new HashTable();
 
 /*
  * Complexity: What is the time complexity of the above functions?

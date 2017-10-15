@@ -69,8 +69,19 @@ HashTable.prototype.remove = function(k) {
 // output: a new hash table
 // compare the old hash table's limit with new limit
   // 
-HashTable.prototype.resize = function() {
+ HashTable.prototype.resize = function(newLimit) {
+  var oldStroage = this._storage;
+  newLimit = Math.max(newLimit, 8);
+  
+  this._storage = LimitedArray(this._limit);
+  this._limit = newLimit;
+  
+  oldStroage.each(function(bucket) {
+    for (var i = 0; i < bucket.length; i++) {
+      
+    }
 
+  }).bind(this);
 
 }; 
 
